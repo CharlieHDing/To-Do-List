@@ -16,6 +16,7 @@ class AddTask extends React.Component {
           name=""
           id="newDescription"
           onChange={this.handleChange}
+          value={newDescription}
         />
         <label htmlFor="newDueDate">Due Date</label>
         <input
@@ -23,6 +24,8 @@ class AddTask extends React.Component {
           name=""
           id="newDueDate"
           onChange={this.handleChange}
+          value={newDueDate}
+
         />
         <label htmlFor="newPriority">Priority</label>
         <input
@@ -30,6 +33,8 @@ class AddTask extends React.Component {
           name=""
           id="newPriority"
           onChange={this.handleChange}
+          value={newPriority}
+
         />
         <button>Add Task</button>
       </form>
@@ -38,14 +43,13 @@ class AddTask extends React.Component {
 
   handleChange = (changeEvent) => {
     const { id, value } = changeEvent.target;
-    console.log(value);
-    this.setState({ [id]: value }, () => {
-      console.log(this.state);
-    });
+    this.setState({ [id]: value });
   };
 
   handleSubmit = (submitEvent) => {
     submitEvent.preventDefault();
+    this.props.addNewTask(this.state)
+    this.setState({newDescription: "", newDueDate: "", newPriority: ""})
   };
 }
 

@@ -8,34 +8,37 @@ class App extends React.Component {
     listItems: [
       {
         description: "Walk the dogs",
-        dueDate: "25-08-2020",
+        dueDate: "2020-08-25",
         priority: "medium",
       },
       {
         description: "feed the dogs",
-        dueDate: "24-08-2020",
+        dueDate: "2020-08-24",
         priority: "high",
       },
     ],
   };
 
   render = () => {
+    console.log(this.state.listItems)
     return (
       <div className="App">
         <header>
           <h1>To Do List</h1>
         </header>
         <main>
-          <AddTask
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
+          <AddTask addNewTask={this.addNewTask}/>
           <ToDoList listItems={this.state.listItems} />
         </main>
       </div>
     );
   };
-  //methods
+
+  addNewTask = (newTask) => {
+    this.setState((currentState)=>{
+      return {listItems: [...currentState.listItems, {description: newTask.newDescription, dueDate: newTask.newDueDate, priority: newTask.newPriority}]}
+    })
+  }
 }
 
 export default App;
